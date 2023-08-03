@@ -1,0 +1,18 @@
+@import "@/styles/light/index.scss";
+@import "@/styles/dark/index.scss";
+
+/* ***************** 全局重置 ***************** */
+body,
+div {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
