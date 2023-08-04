@@ -15,7 +15,7 @@ export default {
 
     const login = (query) => {
       router.replace({
-        name: 'home',
+        path: 'home',
         query: {
           ...route.query,
           ...query,

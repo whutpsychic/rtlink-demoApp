@@ -1,50 +1,41 @@
 <template>
-  <rtm-app-container :title="'首页'" :moreActions="actions" @action="onAction">
-    <template #body>
-      <div class="home">home</div>
-      <van-button type="primary">首页</van-button>
-      <van-button type="primary">列表1</van-button>
-      <van-button type="primary">列表2</van-button>
-      <van-button type="primary">我的</van-button>
-      <van-button type="primary" @click="navto('developer')">开发者中心</van-button>
-      <van-radio-group v-model="style" @change="onChange">
-        <van-radio name="light">浅色风格（默认）</van-radio>
-        <van-radio name="dark">深色风格</van-radio>
-      </van-radio-group>
-    </template>
-  </rtm-app-container>
+  <router-view></router-view>
+  <!-- 底部导航 -->
+  <van-tabbar fixed v-model="active" :before-change="beforeChangeTab">
+    <van-tabbar-item icon="home-o" to="/home/main">首页</van-tabbar-item>
+    <van-tabbar-item icon="search" to="/home/message">消息</van-tabbar-item>
+    <van-tabbar-item to="/home/create-process">
+      <template #icon>
+        <AddIcon />
+      </template>
+    </van-tabbar-item>
+    <van-tabbar-item icon="friends-o" to="/home/craft-table">工作台</van-tabbar-item>
+    <van-tabbar-item icon="setting-o" to="/home/mine">我的</van-tabbar-item>
+  </van-tabbar>
 </template>
 
 <script setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
+import AddIcon from "./com/add-icon.vue"
 
-const store = useStore()
-const router = useRouter()
 // --------------- data ---------------
-const style = ref(store.state.style)
-
-const actions = ref([
-  { text: "搜索", icon: "search" },
-  { text: "扫一扫", icon: "qr" },
-])
+const active = ref(0);
 
 // --------------- methods ---------------
-const onAction = (text, index) => {
-  console.log(text, index)
+
+const beforeChangeTab = (index) => {
+  console.log(index)
+  // 点击“添加流程”只触发动作，不进行跳转
+  if (index === 2) {
+    // 添加流程触发的动作
+    console.log("触发动作")
+    return false
+  }
+  else {
+    return true
+  }
 }
-
-const onChange = (v) => {
-  console.log(v)
-  store.commit('changeStyle', v)
-}
-
-const navto = (name) => {
-  router.push(name)
-}
-
-
-
 
 </script>
+
+<style lang="scss" scoped></style>

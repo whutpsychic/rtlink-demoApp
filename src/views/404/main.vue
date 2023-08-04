@@ -28,7 +28,7 @@ const loop = () => {
   }
   const left = secondLeft.value + 1
   if (left < 2) {
-    router.replace("/home")
+    router.replace("/home/main")
   } else {
     secondLeft.value--
     setTimeout(() => {
@@ -39,7 +39,7 @@ const loop = () => {
 
 const backupNow = () => {
   breakup.value = true
-  router.replace('/home')
+  router.replace('/home/main')
 }
 
 </script>

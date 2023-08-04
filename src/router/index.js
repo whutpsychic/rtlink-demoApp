@@ -1,14 +1,20 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home/main.vue'
+import HomeMain from '../views/Home/main.vue'
 import Login from '../views/Login/main.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
+    // 首页
     {
-      path: '/home',
-      name: 'home',
-      component: Home
+      path: '/:name',
+      component: HomeMain,
+      children: [
+        { path: 'main', component: () => import('../views/Home/home.vue') },
+        { path: 'message', component: () => import('../views/Home/message.vue') },
+        { path: 'craft-table', component: () => import('../views/Home/craft-table.vue') },
+        { path: 'mine', component: () => import('../views/Home/mine.vue') },
+      ]
     },
     {
       path: '/login',
@@ -64,6 +70,10 @@ const router = createRouter({
     {
       path: '/',
       redirect: "/login"
+    },
+    {
+      path: '/home',
+      redirect: "/home/main"
     },
     // 404
     {

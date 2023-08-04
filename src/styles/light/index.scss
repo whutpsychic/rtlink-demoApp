@@ -1,18 +1,52 @@
-$textColor: #1e90ff;
+// 默认文字颜色
+$textColor: #233;
 
+// app-body 默认颜色
+$bodyColor: #ebf7ff;
+
+// ------------------------- vant 相关 -------------------------
 :root:root {
 
   .light {
     color: $textColor;
 
+    .van-nav-bar__title {
+      letter-spacing: 4px;
+      font-weight: normal;
+    }
 
-
-
-
-
-
-    .home {}
-
+    // primary 按钮样式
     --van-button-primary-background: #1e90ff;
+    // nav-bar 样式
+    --van-nav-bar-background: linear-gradient(to right, #5974ff, #00c6ff);
+    // nav-bar 文字颜色
+    --van-nav-bar-title-text-color:#fff;
   }
+}
+
+// ------------------------- 自摆组件 -------------------------
+.light {
+
+  // ========== 全局 ==========
+  .rt-app-body {
+    background-color: $bodyColor;
+  }
+
+  // ========== 首页 ==========
+  .rtm-app-container.home {
+    .top-text {
+      font-size: 16px;
+      letter-spacing: 1px;
+      // color: #fff;
+    }
+
+    .developer-btn {
+      // color: #fff;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 30px;
+      padding: 10px 30px;
+      height: auto;
+    }
+  }
+
 }
