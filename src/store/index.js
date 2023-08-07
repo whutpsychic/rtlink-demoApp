@@ -6,7 +6,9 @@ const store = createStore({
   state() {
     return {
       // 默认风格
-      style: style
+      style: style,
+      // 当前页面等级
+      pageLevel: 1,
     }
   },
   // 
@@ -14,7 +16,11 @@ const store = createStore({
     // 切换风格
     changeStyle(state, style) {
       state.style = style
-    }
+    },
+    // 记录当前页面等级
+    markPageLevel(state, lvl) {
+      state.pageLevel = lvl
+    },
   }
 })
 

@@ -23,6 +23,10 @@ const navto = (name) => {
   router.push(`model-page/${name}`)
 }
 
+const navto2 = (name) => {
+  router.push(`/${name}`)
+}
+
 </script>
 
 <style scoped>

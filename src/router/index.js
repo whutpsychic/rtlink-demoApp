@@ -10,21 +10,23 @@ const router = createRouter({
       path: '/:name',
       component: HomeMain,
       children: [
-        { path: 'main', component: () => import('../views/Home/home.vue') },
+        { path: 'main', component: () => import('../views/Home/home.vue'), meta: { pageLevel: 1 }, },
         { path: 'message', component: () => import('../views/Home/message.vue') },
         { path: 'craft-table', component: () => import('../views/Home/craft-table.vue') },
         { path: 'mine', component: () => import('../views/Home/mine.vue') },
-      ]
+      ],
+      meta: { pageLevel: 1 },
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
     },
     {
       path: '/developer',
       name: 'developer',
-      component: () => import('../views/Developer/main.vue')
+      component: () => import('../views/Developer/main.vue'),
+      meta: { pageLevel: 2 },
     },
     // ********************************************************************************
     // {
@@ -36,6 +38,13 @@ const router = createRouter({
     //   component: () => import('../views/AboutView.vue')
     // }
     // ********************************************************************************
+    // ************************************ 流程相关 ************************************
+    // 创建流程
+    {
+      path: '/process/create',
+      component: () => import('../views/CreateProcess/main.vue'),
+      meta: { pageLevel: 3 },
+    },
     // ************************************ 模板页面 ************************************
     {
       path: '/model-page/doubleColPullRefreshList',

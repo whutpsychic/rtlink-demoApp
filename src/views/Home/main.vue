@@ -1,17 +1,19 @@
 <template>
-  <router-view></router-view>
-  <!-- 底部导航 -->
-  <van-tabbar fixed v-model="active" :before-change="beforeChangeTab">
-    <van-tabbar-item icon="home-o" to="/home/main">首页</van-tabbar-item>
-    <van-tabbar-item icon="search" to="/home/message">消息</van-tabbar-item>
-    <van-tabbar-item to="/home/create-process">
-      <template #icon>
-        <AddIcon />
-      </template>
-    </van-tabbar-item>
-    <van-tabbar-item icon="friends-o" to="/home/craft-table">工作台</van-tabbar-item>
-    <van-tabbar-item icon="setting-o" to="/home/mine">我的</van-tabbar-item>
-  </van-tabbar>
+  <div>
+    <router-view></router-view>
+    <!-- 底部导航 -->
+    <van-tabbar fixed v-model="active" :before-change="beforeChangeTab">
+      <van-tabbar-item icon="home-o" to="/home/main">首页</van-tabbar-item>
+      <van-tabbar-item icon="search" to="/home/message">消息</van-tabbar-item>
+      <van-tabbar-item to="/home/create-process">
+        <template #icon>
+          <AddIcon />
+        </template>
+      </van-tabbar-item>
+      <van-tabbar-item icon="friends-o" to="/home/craft-table">工作台</van-tabbar-item>
+      <van-tabbar-item icon="setting-o" to="/home/mine">我的</van-tabbar-item>
+    </van-tabbar>
+  </div>
 </template>
 
 <script setup>
