@@ -10,10 +10,10 @@ const router = createRouter({
       path: '/:name',
       component: HomeMain,
       children: [
-        { path: 'main', component: () => import('../views/Home/home.vue'), meta: { pageLevel: 1 }, },
-        { path: 'message', component: () => import('../views/Home/message.vue') },
-        { path: 'craft-table', component: () => import('../views/Home/craft-table.vue') },
-        { path: 'mine', component: () => import('../views/Home/mine.vue') },
+        { path: 'main', component: () => import('../views/Home/home.vue'), meta: { pageLevel: 1 } },
+        { path: 'message', component: () => import('../views/Home/message.vue'), meta: { pageLevel: 1 } },
+        { path: 'craft-table', component: () => import('../views/Home/craft-table.vue'), meta: { pageLevel: 1 } },
+        { path: 'mine', component: () => import('../views/Home/mine.vue'), meta: { pageLevel: 1 } },
       ],
       meta: { pageLevel: 1 },
     },
@@ -48,31 +48,38 @@ const router = createRouter({
     // ************************************ 模板页面 ************************************
     {
       path: '/model-page/doubleColPullRefreshList',
-      component: () => import('../model-pages/doubleColPullRefreshList/main.vue')
+      component: () => import('../model-pages/doubleColPullRefreshList/main.vue'),
+      meta: { pageLevel: 3 },
     },
     {
       path: '/model-page/doubleColPullRefreshListTopSearcher',
-      component: () => import('../model-pages/doubleColPullRefreshListTopSearcher/main.vue')
+      component: () => import('../model-pages/doubleColPullRefreshListTopSearcher/main.vue'),
+      meta: { pageLevel: 3 },
     },
     {
       path: '/model-page/doubleColPullRefreshListTopTab',
-      component: () => import('../model-pages/doubleColPullRefreshListTopTab/main.vue')
+      component: () => import('../model-pages/doubleColPullRefreshListTopTab/main.vue'),
+      meta: { pageLevel: 3 },
     },
     {
       path: '/model-page/pullRefreshList',
-      component: () => import('../model-pages/pullRefreshList/main.vue')
+      component: () => import('../model-pages/pullRefreshList/main.vue'),
+      meta: { pageLevel: 3 },
     },
     {
       path: '/model-page/pullRefreshListTopSearcher',
-      component: () => import('../model-pages/pullRefreshListTopSearcher/main.vue')
+      component: () => import('../model-pages/pullRefreshListTopSearcher/main.vue'),
+      meta: { pageLevel: 3 },
     },
     {
       path: '/model-page/pullRefreshListTopTab',
-      component: () => import('../model-pages/pullRefreshListTopTab/main.vue')
+      component: () => import('../model-pages/pullRefreshListTopTab/main.vue'),
+      meta: { pageLevel: 3 },
     },
     {
       path: '/model-page/commonForm',
-      component: () => import('../model-pages/commonForm/main.vue')
+      component: () => import('../model-pages/commonForm/main.vue'),
+      meta: { pageLevel: 3 },
     },
     // ********************************************************************************
     // 默认导向登陆

@@ -1,11 +1,13 @@
 <template>
   <div :class="cls">
-    <router-view v-slot="{ Component, route }">
-      <!-- 使用任何自定义过渡和回退到 `fade` -->
+    <!-- 启用过渡动效 -->
+    <router-view v-if="enableRouterAnimate" v-slot="{ Component, route }">
       <transition :name="checkTransitionName(route)" mode="out-in">
         <component :is="Component" />
       </transition>
     </router-view>
+    <!-- 不启用过渡动效 -->
+    <router-view v-else></router-view>
   </div>
 </template>
 
@@ -13,6 +15,7 @@
 import { computed } from 'vue'
 import { RouterView } from 'vue-router'
 import { useStore } from 'vuex'
+import { enableRouterAnimate } from './appConfig.js'
 
 const store = useStore()
 
