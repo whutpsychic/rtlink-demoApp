@@ -1,7 +1,10 @@
 <template>
   <main>
-    <div class="login">login</div>
-    <van-button type="primary" @click="login">登陆跳转到主页</van-button>
+    <div class="login">
+      <h1>登录页</h1>
+      <p>此页面尚未经过设计</p>
+    </div>
+    <van-button type="primary" @click="login">转到主页</van-button>
   </main>
 </template>
 
