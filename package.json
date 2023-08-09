@@ -1,6 +1,6 @@
 {
   "name": "rt_mobile_app",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@vant/area-data": "^1.4.1",
+    "axios": "^1.4.0",
+    "js-base64": "^3.7.5",
+    "jsencrypt": "^3.3.2",
     "moment": "^2.29.4",
     "rtlink-core": "^0.3.5",
     "rtlink-icon": "^2.0.0",

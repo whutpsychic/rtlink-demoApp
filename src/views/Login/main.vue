@@ -8,28 +8,29 @@
   </main>
 </template>
 
-<script>
+<script setup>
 import { useRouter, useRoute } from "vue-router"
+import api from "@/api/login.js"
 
-export default {
-  setup() {
-    const router = useRouter()
-    const route = useRoute()
+const router = useRouter()
+const route = useRoute()
 
-    const login = (query) => {
+const loginInfo = {
+  account: "admin",
+  password: "123456",
+  tenantId: "",
+}
+
+const login = () => {
+  api.login(loginInfo).then((success) => {
+    // 前往主页
+    if (success) {
       router.replace({
-        path: 'home',
-        query: {
-          ...route.query,
-          ...query,
-        },
+        path: 'home'
       })
     }
-
-    return {
-      login
-    }
-  },
+  })
 }
+
 
 </script>

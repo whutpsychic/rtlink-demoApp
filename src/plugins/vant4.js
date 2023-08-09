@@ -1,7 +1,6 @@
-import { Toast } from 'vant'
-
-export default {
-  install(app) {
-    app.use(Toast)
-  }
-}
+// Toast
+import 'vant/es/toast/style';
+// Dialog
+import 'vant/es/dialog/style';
+// Notify
+import 'vant/es/notify/style';
