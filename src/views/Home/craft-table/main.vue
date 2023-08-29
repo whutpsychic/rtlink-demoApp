@@ -18,7 +18,7 @@
 import { ref } from "vue";
 import { showLoadingToast, closeToast } from "vant";
 import navItem from "../com/nav-item.vue";
-import api from "@/api/home";
+import api from "@/api-demo/home";
 
 const activeName = ref("defaultGroup");
 const tabs = ref([]);

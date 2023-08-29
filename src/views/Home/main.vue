@@ -50,7 +50,7 @@ import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 import AddIcon from "./com/add-icon.vue";
-import api from "@/api/home";
+import api from "@/api-demo/home";
 import { withCreateProcessBtn } from "@/appConfig.js";
 
 const router = useRouter();

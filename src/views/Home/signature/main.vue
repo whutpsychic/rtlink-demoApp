@@ -16,8 +16,8 @@
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { showLoadingToast, closeToast, showSuccessToast, showFailToast } from "vant";
-import api from "@/api/home";
-import commonApi from "@/api/common";
+import api from "@/api-demo/home";
+import commonApi from "@/api-demo/common";
 
 const route = useRoute();
 const router = useRouter();

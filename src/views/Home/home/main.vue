@@ -32,7 +32,7 @@ import { useRouter } from "vue-router";
 import { showLoadingToast, closeToast } from "vant";
 import MenuItem from "../com/menu-item.vue";
 import { developing } from "@/appConfig.js";
-import api from "@/api/home";
+import api from "@/api-demo/home";
 
 const router = useRouter();
 

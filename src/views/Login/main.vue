@@ -19,12 +19,11 @@
 
 <script setup>
 import { ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
-import { showLoadingToast, closeToast } from "vant";
-import api from "@/api/login.js";
+import { useRouter } from "vue-router";
+import { showLoadingToast, closeToast, showNotify, closeNotify } from "vant";
+import api from "@/api-demo/login.js";
 
 const router = useRouter();
-const route = useRoute();
 
 const loginInfo = ref({
   account: "admin",
@@ -42,6 +41,12 @@ const login = () => {
     // 前往主页
     if (success) {
       router.replace({ path: "home/main" });
+    } else {
+      closeToast();
+      showNotify({ type: 'danger', message: '用户名密码错误' });
+      setTimeout(() => {
+        closeNotify();
+      }, 2000)
     }
   }).finally(() => {
     closeToast();

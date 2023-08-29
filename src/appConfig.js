@@ -20,7 +20,7 @@ const style = "light";
 const enableRouterAnimate = true;
 
 // 是否显示“创建流程”按钮
-const withCreateProcessBtn = true;
+const withCreateProcessBtn = false;
 
 // 下拉列表页单词查询数据条数
 const pageSize = 10;

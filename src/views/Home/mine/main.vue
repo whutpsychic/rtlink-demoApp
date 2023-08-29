@@ -100,9 +100,9 @@ import { showLoadingToast, closeToast, showToast } from "vant";
 import { showConfirmDialog } from "vant";
 import accountState from "../com/account-state.vue";
 import avatarImg from "@/assets/img/avatar-default.png";
-import api from "@/api/home";
-import commonApi from "@/api/common";
-import ucapi from "@/api/login";
+import api from "@/api-demo/home";
+import commonApi from "@/api-demo/common";
+import ucapi from "@/api-demo/login";
 
 const spliterHeight = 20;
 const router = useRouter();
@@ -187,19 +187,19 @@ api.getUserInfo().then((res) => {
   const { user } = res;
   userRoleInfo.value = res;
   userInfo.value = user;
-  // 获取用户头像
-  commonApi.getImageByFileId(user.photo, (result) => {
-    avatar.value = result
-  });
+  // // 获取用户头像
+  // commonApi.getImageByFileId(user.photo, (result) => {
+  //   avatar.value = result
+  // });
 });
 
 // 获取提交签章前的必要信息
 api.getPreSignatureInfo().then((res) => {
   preSignatureInfo.value = { ...res };
-  // 获取签名图片
-  commonApi.getImageByFileId(res.fileId, (result) => {
-    signatureImg.value = result
-  });
+  // // 获取签名图片
+  // commonApi.getImageByFileId(res.fileId, (result) => {
+  //   signatureImg.value = result
+  // });
 }).finally(() => {
   closeToast();
 });

@@ -1,3 +1,5 @@
+import { fakeIOTimeout } from "@/appConfig";
+
 const tool = {};
 
 // 生成一个随机名字作为上传的文件名
@@ -28,7 +30,6 @@ tool.base64ToFile = (urlData, fileName) => {
   return new File([ia], fileName, { type: mime })
 };
 
-
 tool.countDate = (date) => {
   var currentDate = new Date().getTime();
   date = new Date(date.replace(/-/g, '/')).getTime();
@@ -58,5 +59,31 @@ tool.countDate = (date) => {
     return val;
   }
 }
+
+// 处理通用的假接口函数
+tool.fakeIO = (result) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(result);
+    }, fakeIOTimeout)
+  })
+}
+
+tool.fakeListIO = (page, result) => {
+  const r = Math.random() > 0.5;
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (page === 1) {
+        resolve(result);
+      } else {
+        if (r) {
+          resolve(result);
+        } else {
+          resolve([]);
+        }
+      }
+    }, fakeIOTimeout);
+  });
+};
 
 export default tool;

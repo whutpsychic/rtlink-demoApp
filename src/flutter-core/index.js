@@ -12,13 +12,12 @@ const module = {};
 
 // 初始化
 // 此函数用于挂载默认设置,仅需在应用起始位置调用一次即可
-module.init = (_this) => {
+module.init = (router) => {
 
   // 注册后退函数（供flutter调用）
   fc.register("goback", () => {
-    _this.$router.back();
+    router.back();
   });
-
 };
 
 // 注册从 flutter 端来的回调函数

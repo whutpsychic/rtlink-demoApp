@@ -13,11 +13,12 @@
 
 <script setup>
 import { computed } from "vue";
-import { RouterView } from "vue-router";
+import { RouterView, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { enableRouterAnimate } from "./appConfig.js";
 import fc from "@/flutter-core";
 
+const router = useRouter();
 const store = useStore();
 
 const cls = computed(() => {
@@ -59,5 +60,10 @@ fc.getSafeHeight();
 fc.await("getSafeHeight", (res) => {
   store.commit("recordSafeHeights", res);
 });
+// 注入安卓的默认后退动作监听
+fc.init(router);
+
+// 将设备条设置为浅色风格
+fc.setTopbarStyleToLight();
 </script>
 
