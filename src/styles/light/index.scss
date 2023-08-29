@@ -4,7 +4,7 @@ $textColor: #233;
 // app-body 默认颜色
 $bodyColor: #ebf7ff;
 
-// ------------------------- vant 相关 -------------------------
+// ============================= vant 相关 =============================
 :root:root {
 
   .light {
@@ -15,14 +15,64 @@ $bodyColor: #ebf7ff;
       font-weight: normal;
     }
 
+    //  ------------------------- 《登录页》 -------------------------
+    .login .form-item {
+      // .van-field__label,
+      // .van-field__value {
+      //   color: 
+      // }
+
+      // 账号输入框颜色
+      --van-field-label-color: #fff;
+      // 密码输入框颜色
+      --van-field-input-text-color: #fff;
+    }
+
+    // 登录页 - 登录按钮背景颜色
+    .login .van-button--default {
+      background: linear-gradient(to bottom, #fff, #e3e8ff);
+      border: none;
+    }
+
+    //  ------------------------- 《首页 - 我的》 -------------------------
+    .mine-item {
+      // 文字颜色
+      --van-field-input-text-color: #888;
+    }
+
+    .tag-container.nodata {
+      // 无数据的背景色
+      --van-tag-primary-color: #eee;
+      // 无数据的文字颜色
+      --van-tag-text-color: #666;
+    }
+
+    //  ------------------------- 《首页 - 工作台》 -------------------------
+    .menus-tab {
+      // tab 选中底颜色
+      --van-tabs-bottom-bar-color: #62c2f8;
+    }
+
+    //  ------------------------------------------------------------------
+    // nav-bar 样式
+    .van-nav-bar {
+      background: url('@/assets/img/navbar-bg.png');
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+
     // primary 按钮样式
     --van-button-primary-background: #1e90ff;
-    // nav-bar 样式
-    --van-nav-bar-background: linear-gradient(to right, #5974ff, #00c6ff);
     // nav-bar 文字颜色
     --van-nav-bar-title-text-color:#fff;
     // nav-bar 后退箭头颜色
     --van-nav-bar-icon-color:#fff;
+    // 首页底部 nav-tab-item 文字颜色(选中)
+    --van-tabbar-item-active-color:#5d77fd;
+    // 首页底部 nav-tab-item 文字颜色(未选中)
+    --van-tabbar-item-text-color:#aab7ca;
+    // 表单项字体
+    --van-cell-font-size: 16px;
   }
 }
 
@@ -30,7 +80,7 @@ $bodyColor: #ebf7ff;
 .light {
 
   // ========== 全局 ==========
-  .rt-app-body {
+  .rtm-app-body {
     background-color: $bodyColor;
   }
 
@@ -39,16 +89,76 @@ $bodyColor: #ebf7ff;
     .top-text {
       font-size: 16px;
       letter-spacing: 1px;
-      // color: #fff;
+      color: #fff;
     }
 
     .developer-btn {
-      // color: #fff;
+      color: #fff;
       background-color: rgba(255, 255, 255, 0.5);
       border-radius: 30px;
       padding: 10px 30px;
       height: auto;
     }
+  }
+
+  .menu-item-wrapper {
+    background-color: #fff;
+    box-shadow: 1px 1px 4px 1px #ccc;
+
+    p {
+      color: #6acaf8;
+    }
+
+    p.value {
+      color: #969696;
+    }
+  }
+
+  // ========== 首页 - 工作台 ==========
+  .nav-item-wrapper {
+    border-color: #98b6cb;
+
+    p.name {
+      color: #62c2f8;
+    }
+  }
+
+  .van-grid-item.craft-table-nav-item>div:after {
+    border-radius: 4px;
+    border: solid 1px #98b6cb;
+  }
+
+  // ========== 待办已办 ==========
+  .todos-dones-item-can {
+    // 单项底边颜色
+    border-bottom-color: #e8e8e8;
+
+    p.title,
+    p.time {
+      // 标题、时间字颜色
+      color: #343434;
+    }
+
+    // 时间标注字颜色
+    p.sustain {
+      color: #999;
+    }
+
+    // tag 背景色
+    --van-tag-default-color:#45c60d;
+  }
+
+  // ========== 模板页 ==========
+  // 下拉刷新列表单项
+  .mp-item-can {
+    background-color: #fff;
+    border-color: #eee;
+    border-bottom-color: #ddd;
+    box-shadow: 4px 4px 4px #ddd;
+  }
+
+  .mp-item-can:active {
+    border-color: transparent;
   }
 
 }

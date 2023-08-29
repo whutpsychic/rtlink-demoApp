@@ -6,7 +6,7 @@ import timepicker from './timepicker/main.vue'
 import idNumber from './id-number/main.vue'
 import radio from './radio/main.vue'
 import picker from './picker/main.vue'
-import steper from './steper/main.vue'
+import stepper from './stepper/main.vue'
 import textField from './text-field/main.vue'
 
 export default {
@@ -18,7 +18,7 @@ export default {
   "id-number": idNumber,
   radio,
   picker,
-  steper,
+  stepper,
   "text-field": textField,
 }
 

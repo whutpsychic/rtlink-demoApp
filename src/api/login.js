@@ -1,5 +1,5 @@
-import request from "@/utils/request.js"
 import { JSEncrypt } from 'jsencrypt'
+import { request } from "@/utils"
 import store from "@/store"
 
 const api = {}
@@ -18,7 +18,7 @@ const encryptWithRsa = (string) => {
 // ------------------------------------------------------
 
 // 主登录
-api.login = (loginInfo = {}, callback, errorCallback) => {
+api.login = (loginInfo = {}) => {
   const ucServer = apiContext.uc
   return request({
     url: `${ucServer}/auth?tenantId=${loginInfo.tenantId || ''}`,
@@ -30,15 +30,30 @@ api.login = (loginInfo = {}, callback, errorCallback) => {
   })
     // 登录成功
     .then((res) => {
+      // 本地存储
       // 记录 token
-      store.commit("recordUser", res.data)
+      sessionStorage.setItem("authorization", res.token)
+      // 记录 user 完整数据
+      sessionStorage.setItem("userInfo", JSON.stringify(res))
+
       return true
     })
     // 登陆失败
     .catch((err) => {
       console.error(err)
-      store.commit("clearUser")
     })
+}
+
+// 退出登录
+api.logout = () => {
+  const ucServer = apiContext.uc;
+  return request({
+    url: `${ucServer}/signout`,
+    method: 'GET'
+  }).then(() => {
+    // 清除本地存储数据
+    sessionStorage.clear()
+  });
 }
 
 export default api

@@ -30,21 +30,27 @@ axios.interceptors.request.use(
     //       .getItem(store.state.loginAccount + 'loginRoutePath')
     //       .replace('/login/', '') || ''
     // }
-    const { currentUser } = store.state
-    if (currentUser.token && !config.headers.Authorization) {
-      config.headers.Authorization = `Bearer ${currentUser.token}`
-    }
+
+    // 全局变量获取 token
+    const currentUser = JSON.parse(sessionStorage.getItem("userInfo"));
+
+    // 本地存储获取 token
+    const token = sessionStorage.getItem('authorization');
+    if (!!token) {
+      config.headers.Authorization = `Bearer ${token}`
+    };
+
     // 如果是请求 auth 接口，则不带 token
     if (config.url.indexOf('/auth?') !== -1) {
       delete config.headers.Authorization
-    }
+    };
     // 如果是请求 sso 接口，则不带 token
     if (config.url.indexOf('/sso/') !== -1) {
       delete config.headers.Authorization
     }
     // 判断是否需要刷新token
     let currentTime = new Date().getTime()
-    if (currentUser.loginTime
+    if (currentUser && currentUser.loginTime
       && (currentTime - currentUser.loginTime >= (currentUser.expiration / 5) * 1000)
       && config.url.indexOf('/refresh') === -1
     ) {
@@ -90,17 +96,13 @@ axios.interceptors.response.use(
     //   )
     //   saveAs(blob, fileName)
     // }
-    return res
+    return res.data
   },
   (error) => {
     // 处理响应失败
     const errorMessage =
-      error &&
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-        ? error.response.data.message
-        : error.message
+      (error && error.response && error.response.data && error.response.data.message) ? error.response.data.message : error.message
+
     if (error && error.response && error.response.status === 401) {
       // $store.dispatch('login/clearCurrentUser')
       // 错误则返回登陆
@@ -112,7 +114,11 @@ axios.interceptors.response.use(
         //如果是jwt超时了
         if (error.response.data.message.indexOf('JWT expired at') >= 0) {
           showNotify({ type: 'warning', message: '登录认证超时，请重新登录！' })
-        } else {
+        }
+        else if (errorMessage.indexOf('timeout of') >= 0) {
+          showNotify({ type: 'warning', message: '链接超时，请稍后再试！' })
+        }
+        else {
           showNotify({ type: 'danger', message: error.response.data.message })
         }
       } else {
@@ -122,7 +128,11 @@ axios.interceptors.response.use(
       //如果是jwt超时了
       if (errorMessage.indexOf('JWT expired at') >= 0) {
         showNotify({ type: 'warning', message: '登录认证超时，请重新登录！' })
-      } else {
+      }
+      else if (errorMessage.indexOf('timeout of') >= 0) {
+        showNotify({ type: 'warning', message: '链接超时，请稍后再试！' })
+      }
+      else {
         showNotify({ type: 'danger', message: errorMessage })
       }
     }
@@ -175,7 +185,6 @@ const request = ({ url, method, data, params, onUploadProgress, headers, respons
     isShowMessage: isShowMessage,
   }
 
-  console.log(requestData)
   return axios(requestData)
 }
 

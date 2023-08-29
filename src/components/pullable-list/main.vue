@@ -1,26 +1,28 @@
 <template>
-  <!-- 两列式渲染 -->
-  <van-pull-refresh v-if="doubleCol" v-model="refreshing" @refresh="reloadData" :offset="100">
-    <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="loadData">
-      <div class="doubleCol-mode">
+  <div class="rtm-pullable-list">
+    <!-- 两列式渲染 -->
+    <van-pull-refresh v-if="doubleCol" v-model="refreshing" @refresh="reloadData" :offset="100">
+      <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="loadData">
+        <div class="doubleCol-mode">
+          <slot></slot>
+        </div>
+      </van-list>
+      <!-- 骨架屏 -->
+      <van-skeleton v-show="showSkeleton" title :row="3" />
+      <van-divider v-show="showSkeleton" />
+      <van-skeleton v-show="showSkeleton" title :row="3" />
+    </van-pull-refresh>
+    <!-- 普通模式渲染 -->
+    <van-pull-refresh v-else v-model="refreshing" @refresh="reloadData">
+      <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="loadData" :offset="100">
         <slot></slot>
-      </div>
-    </van-list>
-    <!-- 骨架屏 -->
-    <van-skeleton v-show="showSkeleton" title :row="3" />
-    <van-divider v-show="showSkeleton" />
-    <van-skeleton v-show="showSkeleton" title :row="3" />
-  </van-pull-refresh>
-  <!-- 普通模式渲染 -->
-  <van-pull-refresh v-else v-model="refreshing" @refresh="reloadData">
-    <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="loadData" :offset="100">
-      <slot></slot>
-    </van-list>
-    <!-- 骨架屏 -->
-    <van-skeleton v-show="showSkeleton" title :row="3" />
-    <van-divider v-show="showSkeleton" />
-    <van-skeleton v-show="showSkeleton" title :row="3" />
-  </van-pull-refresh>
+      </van-list>
+      <!-- 骨架屏 -->
+      <van-skeleton v-show="showSkeleton" title :row="3" />
+      <van-divider v-show="showSkeleton" />
+      <van-skeleton v-show="showSkeleton" title :row="3" />
+    </van-pull-refresh>
+  </div>
 </template>
 
 <script setup>
@@ -72,6 +74,7 @@ const finish = () => {
 
 // ================ 外部暴露 ================
 defineExpose({
+  reloadData,
   finish
 })
 </script>

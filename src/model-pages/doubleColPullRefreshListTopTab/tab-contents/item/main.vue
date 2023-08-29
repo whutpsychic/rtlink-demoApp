@@ -1,9 +1,9 @@
 <template>
-  <div class="item-can">
+  <div class="mp-item-can double-col">
     <div class="inner-can">
-      <p class="title">{{ title }}</p>
-      <p>{{ content }}</p>
-      <p>{{ date }}</p>
+      <p class="title">{{ data.title }}</p>
+      <p>{{ data.content }}</p>
+      <p>{{ data.date }}</p>
     </div>
   </div>
 </template>
@@ -11,20 +11,17 @@
 <script setup>
 
 defineProps({
-  title: { type: String, default: "" },
-  content: { type: String, default: "" },
-  date: { type: String, default: "" },
-})
+  data: { type: Object, default: () => ({}) },
+});
 
 </script>
 
 <style lang="scss" scoped>
-.item-can {
-  background-color: white;
+.mp-item-can.double-col {
   margin: 10px;
   border-radius: 8px;
-  box-shadow: 4px 4px 4px #ddd;
-  border: solid 1px #eee;
+  border-style: solid;
+  border-width: 1px;
 
   .inner-can {
     padding: 10px;
@@ -38,9 +35,5 @@ defineProps({
   .title {
     font-weight: bold;
   }
-}
-
-.item-can:active {
-  border-color: #eee;
 }
 </style>

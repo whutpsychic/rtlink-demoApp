@@ -1,8 +1,15 @@
 <template>
-  <div class="rtm-top-searcher">
+  <div :class="searching ? `rtm-top-searcher searching` : `rtm-top-searcher`" :style="`top:${safeTop}px;`">
     <van-search :class="searching ? `searcher searching` : `searcher`" v-model="content" shape="round"
       :placeholder="placeholder" @update:model-value="onChangeValue" @focus="onFocus"
-      :show-action="searching ? true : false" @cancel="onCancel" @clear="content = ''" />
+      :show-action="searching ? true : false" @clear="content = ''" show-action>
+      <template #left v-if="searching">
+        <div class="backup-btn" @click="onCancel"><rtmicon-arrow-right size="20" /></div>
+      </template>
+      <template #action>
+        <div class="cancel-btn" @click="onSearchItem(content)">搜索</div>
+      </template>
+    </van-search>
     <!-- 搜索时的展示内容 -->
     <van-overlay :show="searching" class="overlay" duration="0.1">
       <div class="wrapper">
@@ -24,6 +31,9 @@
 // 常用于数据项展示页顶部用于根据索引名快速定位想要查找的数据
 import { ref, computed } from 'vue'
 import historyItem from "./historyItem.vue"
+import { useStore } from "vuex";
+
+const store = useStore();
 
 const props = defineProps({
   // placeholder
@@ -37,6 +47,7 @@ const props = defineProps({
 const emit = defineEmits(['change', 'search'])
 
 // --------------- data ---------------
+const safeTop = ref(0);
 // 正在搜索
 const searching = ref(false)
 const content = ref("")
@@ -65,9 +76,25 @@ const onSearchItem = (text) => {
   content.value = text
   searching.value = false
   emit("search", text)
-  clientHistory.value = Array.from(new Set([text, ...clientHistory.value]))
+  if (!!text) {
+    clientHistory.value = Array.from(new Set([text, ...clientHistory.value]))
+  }
 }
 
+const reset = () => {
+  content.value = "";
+}
+// --------------- created ---------------
+try {
+  const { safeHeights } = store.state;
+  safeTop.value = safeHeights[0];
+} catch (err) {
+  console.error(err);
+}
+// ================ 外部暴露 ================
+defineExpose({
+  reset
+})
 </script>
 
 <style lang="scss" scoped>
@@ -108,17 +135,32 @@ const onSearchItem = (text) => {
 
   .searcher {
     position: relative;
+    padding-bottom: 0;
   }
 
   .searcher.searching {
     position: absolute;
     width: calc(100% - 12px);
     z-index: 3000;
-    top: 4px;
   }
 }
 
 .overlay {
   background-color: white;
+}
+
+.backup-btn {
+  transform: rotate(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0 10px 10px;
+}
+
+.rtm-top-searcher.searching {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>

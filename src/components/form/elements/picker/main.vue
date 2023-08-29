@@ -1,21 +1,22 @@
 <template>
   <div class="rt-form-item">
-    <van-field readonly clickable :model-value="text" :label="props.label" :rules="props.rules" :placeholder="props.placeholder"
-      :required="isRequired()" @click="showSelector = true" label-align="left" clearable :error-message="errmsg">
+    <van-field readonly clickable :model-value="text" :label="props.label" :rules="props.rules"
+      :placeholder="props.placeholder" :required="isRequired()" @click="showSelector = true" label-align="left" clearable
+      :error-message="errmsg">
     </van-field>
-    <van-popup v-model:show="showSelector" @open="openup" @close="checkVal" position="bottom">
-      <van-picker ref="picker" :value="value" show-toolbar :columns="options" @confirm="onConfirm" @cancel="onCancel" />
+    <van-popup v-model:show="showSelector" @close="checkVal" position="bottom" @open="openUp">
+      <van-picker v-model="pv" ref="picker" show-toolbar :columns="options" @confirm="onConfirm" @cancel="onCancel" />
     </van-popup>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { judgeIfRequired } from "../utils"
+import { ref, computed } from "vue";
+import { judgeIfRequired } from "../utils";
 
 const props = defineProps({
   // 值
-  value: { type: String, default: "" },
+  modelValue: { type: String, default: "" },
   // 标签
   label: { type: String, default: "" },
   // 无值填充
@@ -24,80 +25,78 @@ const props = defineProps({
   rules: { type: Array, default: () => ([]) },
   // options
   options: { type: Array, default: () => ([]) }
-})
+});
 
-const emit = defineEmits(['update:value'])
+const emit = defineEmits(['update:model-value']);
 
 // --------------- data ---------------
-const showSelector = ref(false)
-const error = ref(false)
-const picker = ref(null)
+const pv = ref([]);
+const showSelector = ref(false);
+const error = ref(false);
+const picker = ref(null);
 
 // 本项错误信息
 const errmsg = computed(() => {
-  const { rules } = props
+  const { rules } = props;
   if (rules && rules.length) {
     if (error.value) {
-      return rules[0].message
+      return rules[0].message;
     } else {
-      return null
+      return null;
     }
   }
-})
+});
 
 const text = computed(() => {
-  const { options } = props
+  const { options } = props;
   const target = options.find((item) => {
-    return item.value === props.value
+    return item.value === props.modelValue;
   })
   if (target)
-    return target.text
-})
+    return target.text;
+});
 // --------------- methods ---------------
 // 是否必填
 const isRequired = () => {
-  return judgeIfRequired(props.rules)
-}
-
-// v-model:value
-const onConfirm = (v) => {
-  const result = v.selectedOptions[0].value
-  showSelector.value = false
-  emit("update:value", result)
-  //
-  // setTimeout(() => {
-  //   checkVal()
-  // }, 1)
-  checkVal()
-}
+  return judgeIfRequired(props.rules);
+};
 
 // v-model
-const openup = () => {
-  setTimeout(() => {
-    // const { value } = props
-    // let result = picker.value.getSelectedOptions()
-  }, 1)
-}
+const onConfirm = (v) => {
+  const result = v.selectedOptions[0].value;
+  showSelector.value = false;
+  emit("update:model-value", result);
+  checkVal();
+};
 
 // 
 const onCancel = () => {
-  showSelector.value = false
-  checkVal()
-}
+  showSelector.value = false;
+  checkVal();
+};
 
 // 校验是否有错
 const checkVal = () => {
-  const { value } = props
+  const { modelValue } = props;
   // 如果是必填且无值则报错警告
-  if (isRequired() && !value) {
-    error.value = true
+  if (isRequired() && !modelValue) {
+    error.value = true;
   }
   // 否则静默
   else {
-    error.value = false
+    error.value = false;
+  }
+};
+
+// 弹出窗口后将值对齐
+const openUp = () => {
+  const { modelValue } = props;
+  try {
+    pv.value = [modelValue];
+  } catch (err) {
+    console.error(err);
   }
 }
-
 </script>
 
 <style lang="scss" scoped></style>

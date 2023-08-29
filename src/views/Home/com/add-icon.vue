@@ -1,9 +1,6 @@
 <template>
   <div class="bottom-add-icon">
-    <div class="icon-body">
-      <rticon-add :size="20" />
-      <p>创建流程</p>
-    </div>
+    <div class="icon-body"></div>
   </div>
 </template>
 
@@ -28,11 +25,18 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-image: url('@/assets/img/create-process.png');
 
   p {
     flex-basis: 100%;
     text-align: center;
     margin: 6px 0;
   }
+}
+
+.icon-body:active {
+  background-image: url('@/assets/img/create-process-active.png');
 }
 </style>

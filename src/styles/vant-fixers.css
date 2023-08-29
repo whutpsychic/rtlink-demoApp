@@ -1,0 +1,8 @@
+/* 表单前置图标居中修复 */
+/* 按钮前置图标居中修复 */
+.van-field__left-icon,
+.van-button__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

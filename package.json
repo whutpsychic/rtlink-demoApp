@@ -16,7 +16,7 @@
     "jsencrypt": "^3.3.2",
     "moment": "^2.29.4",
     "rtlink-core": "^0.3.5",
-    "rtlink-icon": "^2.0.0",
+    "rtlink-icon": "^2.2.2",
     "vant": "^4.6.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2",

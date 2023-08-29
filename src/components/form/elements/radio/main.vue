@@ -1,6 +1,6 @@
 <template>
   <div class="rt-form-item">
-    <van-field readonly clickable :model-value="value" :label="label" :rules="rules" :required="isRequired()"
+    <van-field readonly clickable :model-value="modelValue" :label="label" :rules="rules" :required="isRequired()"
       label-align="left">
       <template #input>
         <van-radio-group v-model="radio" direction="horizontal" @change="onChange">
@@ -12,39 +12,39 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import { judgeIfRequired } from "../utils"
+import { ref, watch } from "vue";
+import { judgeIfRequired } from "../utils";
 
 const props = defineProps({
   // 值
-  value: { type: String, default: "" },
+  modelValue: { type: String, default: "" },
   // 标签
   label: { type: String, default: "" },
   // 校验规则
   rules: { type: Array, default: () => ([]) },
   // options
   options: { type: Array, default: () => ([]) }
-})
+});
 
-const emit = defineEmits(['update:value'])
+const emit = defineEmits(["update:model-value"]);
 // --------------- data ---------------
-const radio = ref(null)
+const radio = ref(null);
 
-watch(() => props.options, (newv, oldv) => {
+watch(() => props.modelValue, (newv, oldv) => {
   if (newv !== oldv) {
-    radio.value = newv[0].value
+    radio.value = newv;
   }
-})
+});
 // --------------- methods ---------------
 // 是否必填
 const isRequired = () => {
-  return judgeIfRequired(props.rules)
-}
+  return judgeIfRequired(props.rules);
+};
 
-// v-model:value
+// v-model
 const onChange = (v) => {
-  emit("update:value", v)
-}
+  emit("update:model-value", v);
+};
 
 </script>
 

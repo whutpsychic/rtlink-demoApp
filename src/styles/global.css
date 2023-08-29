@@ -1,12 +1,15 @@
 @import "./router-animate.css";
+@import "./vant-fixers.css";
 @import "@/styles/light/index.scss";
 @import "@/styles/dark/index.scss";
 
 /* ***************** 全局重置 ***************** */
-body,
-div {
+* {
   margin: 0;
   padding: 0;
+}
+
+html {
   font-size: 14px;
 }
 
@@ -16,4 +19,9 @@ p {
 
 ul {
   list-style: none;
+}
+
+/* ***************** 全局样式 ***************** */
+.rtm-app-body {
+  min-height: calc(100vh - 96px);
 }

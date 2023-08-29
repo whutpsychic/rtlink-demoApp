@@ -1,31 +1,52 @@
-const api = {}
+import { request } from "@/utils";
+import { pageSize, fakeIOTimeout } from "@/appConfig";
 
-let num = 0
+const api = {};
 
-api.getItems = () => {
-  return new Promise((resolve, reject) => {
+let num = 0;
+// ------------------------------------------------------
+// 查询待办列表
+api.getList = (page = 1, searchText) => {
+  // const querys = searchText ? [
+  //   { property: "xxxxxxx", value: searchText, operation: "LIKE", relation: "OR" },
+  // ] : [];
+
+  // const data = {
+  //   pageBean: { page, pageSize },
+  //   querys
+  // };
+
+  // const bpmRunTime = apiContext.bpmRunTime;
+  // return request({
+  //   url: `${bpmRunTime}/runtime/task/v1/getTodoList`,
+  //   method: 'POST',
+  //   data
+  // }).then((res) => {
+  //   if (res.rows && res.rows.length > 0) {
+  //     return res.rows;
+  //   } else {
+  //     return [];
+  //   }
+  // });
+
+  return new Promise((resolve) => {
     setTimeout(() => {
-      num++
-
-      let arr = [
-        { title: `标题${num}-1`, content: "一些内容", date: "2023-01-01" },
-        { title: `标题${num}-2`, content: "一些内容", date: "2023-01-01" },
-        { title: `标题${num}-3`, content: "一些内容", date: "2023-01-01" },
-        { title: `标题${num}-4`, content: "一些内容", date: "2023-01-01" },
-        { title: `标题${num}-5`, content: "一些内容", date: "2023-01-01" },
-        { title: `标题${num}-6`, content: "一些内容", date: "2023-01-01" },
-        { title: `标题${num}-7`, content: "一些内容", date: "2023-01-01" },
-      ]
-
-      let r = Math.random() * 10 > 3
-    
+      const r = Math.random() > 0.35;
       if (r) {
-        resolve(arr)
+        num++;
+        resolve([
+          { title: `数据标题${num}-1`, content: "内容内容内容内容内容内容内容内容内容内容", date: "2023-08-20" },
+          { title: `数据标题${num}-2`, content: "内容内容内容内容内容内容内容内容内容内容", date: "2023-08-20" },
+          { title: `数据标题${num}-3`, content: "内容内容内容内容内容内容内容内容内容内容", date: "2023-08-20" },
+          { title: `数据标题${num}-4`, content: "内容内容内容内容内容内容内容内容内容内容", date: "2023-08-20" },
+          { title: `数据标题${num}-5`, content: "内容内容内容内容内容内容内容内容内容内容", date: "2023-08-20" },
+          { title: `数据标题${num}-6`, content: "内容内容内容内容内容内容内容内容内容内容", date: "2023-08-20" },
+        ]);
       } else {
-        resolve([])
+        resolve([]);
       }
-    }, 1000)
+    }, fakeIOTimeout);
   })
-}
+};
 
-export default api
+export default api;
