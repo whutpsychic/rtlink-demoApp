@@ -43,6 +43,10 @@ const router = createRouter({
     {
       path: "/developer/device", component: () => import("../views/Developer/device.vue"), meta: { pageLevel: 3 },
     },
+    // 开发者中心 - 权限请求
+    {
+      path: "/developer/permissions", component: () => import("../views/Developer/permissions.vue"), meta: { pageLevel: 3 },
+    },
     // ********************************************************************************
     // {
     //   path: "/about",

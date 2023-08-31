@@ -4,6 +4,7 @@
       <van-button type="primary" block @click="navto('model-pages')">模板页面</van-button>
       <van-button type="primary" block @click="navto('native')">原生功能</van-button>
       <van-button type="primary" block @click="navto('device')">设备功能</van-button>
+      <van-button type="primary" block @click="navto('permissions')">权限请求</van-button>
     </template>
   </rtm-app-container>
 </template>
